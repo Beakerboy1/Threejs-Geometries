@@ -269,7 +269,7 @@ class WedgeGeometry extends BufferGeometry {
  */
 function dupEndPts(points) {
   const l = points.length;
-  if ( l > 2 && !points[l - 1].equals(points[0])) {
+  if ( l > 2 && (points[l - 1][0] !== points[0][0] || points[l - 1][1] !== points[0][1])) {
     points.push(points[0]);
   }
 }
