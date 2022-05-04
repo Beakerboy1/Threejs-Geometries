@@ -40,7 +40,7 @@ class WedgeGeometry extends BufferGeometry {
     // A straight array of vertices for the outer shape
     const outerVertices = [];
 
-    // Ensuse all paths are in the correct direction for the normals
+    // Ensure all paths are in the correct direction for the normals
     const reverse = ! ShapeUtils.isClockWise( points );
     if ( reverse ) {
       points = points.reverse();
@@ -149,8 +149,9 @@ class WedgeGeometry extends BufferGeometry {
     // Walk the shape and find all crossings.
     var point = [];
     var nextPoint = [];
-    var prevPoint = points[points.length - 1];
-    for (let i = 0; i < points.length - 1; i++) {
+    dupEndPoints(points);
+    var prevPoint = points[points.length - 2];
+    for (let i = 0; i < points.length - 2; i++) {
       point = points[i];
       if (i === 0) {
         newOutline.moveTo(point[0], point[1]);
@@ -205,7 +206,7 @@ class WedgeGeometry extends BufferGeometry {
     // The crossing number that will close the current shape.
     var activeCrossing = -1;
     var currentShape = new Shape();
-    for (let i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length - 2; i++) {
       point = points[i];
       if (i === 0) {
         currentShape.moveTo(point[0], point[1]);
@@ -262,4 +263,15 @@ class WedgeGeometry extends BufferGeometry {
     return [pointX, pointY];
   }
 }
+
+/**
+ * Ensure the start and end points are the same.
+ */
+function dupEndPts(points) {
+  const l = points.length;
+  if ( l > 2 && !points[l - 1].equals(points[0])) {
+    points.push(points[0]);
+  }
+}
+
 export { WedgeGeometry };
