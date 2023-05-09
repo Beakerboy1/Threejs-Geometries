@@ -12,7 +12,7 @@ import {
  */
 class WedgeGeometry extends BufferGeometry {
 
-	constructor(shape = new Shape( [ new Vector2( 0.5, 0.5 ), new Vector2( - 0.5, 0.5 ), new Vector2( - 0.5, - 0.5 ), new Vector2( 0.5, - 0.5 ) ] ), options = {}) {
+	constructor( shape = new Shape( [ new Vector2( 0.5, 0.5 ), new Vector2( - 0.5, 0.5 ), new Vector2( - 0.5, - 0.5 ), new Vector2( 0.5, - 0.5 ) ] ), options = {} ) {
 
 		super();
 		this.type = 'WedgeGeometry';
@@ -31,30 +31,36 @@ class WedgeGeometry extends BufferGeometry {
 		// The direction that the downward slope faces,
 		const angle = options.angle;
 
-    // Get the outer shape and holes.
-    var points = shape.extractPoints().shape;
-    var holes = shape.extractPoints().holes;
+		// Get the outer shape and holes.
+		var points = shape.extractPoints().shape;
+		var holes = shape.extractPoints().holes;
 
-    // The outer shape is the original shape plus any crossing points.
-    const outerShape = new Shape();
+		// The outer shape is the original shape plus any crossing points.
+		const outerShape = new Shape();
 
-    // A straight array of vertices for the outer shape
-    const outerVertices = [];
+		// A straight array of vertices for the outer shape
+		const outerVertices = [];
 
-    // Ensuse all paths are in the correct direction for the normals
-    const reverse = ! ShapeUtils.isClockWise( points );
-    if ( reverse ) {
-      points = points.reverse();
-      // Check that any holes are correct direction.
-      for (let h = 0; h < holes.length; h++) {
-        const hole = holes[h];
-        if (ShapeUtils.isClockWise(hole)) {
-          holes[h] = hole.reverse();
-        }
-      }
-    }
-    // The original shape's point, but rotated and centered.
-    const newPoints = [];
+		// Ensuse all paths are in the correct direction for the normals
+		const reverse = ! ShapeUtils.isClockWise( points );
+		if ( reverse ) {
+
+			points = points.reverse();
+			// Check that any holes are correct direction.
+			for (let h = 0; h < holes.length; h++) {
+
+				const hole = holes[h];
+				if ( ShapeUtils.isClockWise( hole ) ) {
+
+					holes[h] = hole.reverse();
+	
+				}
+
+			}
+
+		}
+		// The original shape's point, but rotated and centered.
+		const newPoints = [];
 
     var point;
     var minY;
