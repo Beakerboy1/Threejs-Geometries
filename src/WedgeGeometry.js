@@ -11,24 +11,25 @@ import {
  * Modify ExtrudeGeometry such that z varies with x and y
  */
 class WedgeGeometry extends BufferGeometry {
-  constructor(shape = new Shape( [ new Vector2( 0.5, 0.5 ), new Vector2( - 0.5, 0.5 ), new Vector2( - 0.5, - 0.5 ), new Vector2( 0.5, - 0.5 ) ] ), options = {}) {
-    super();
 
-    this.type = 'WedgeGeometry';
+	constructor(shape = new Shape( [ new Vector2( 0.5, 0.5 ), new Vector2( - 0.5, 0.5 ), new Vector2( - 0.5, - 0.5 ), new Vector2( 0.5, - 0.5 ) ] ), options = {}) {
 
-    this.parameters = {
-      shape: shape,
-      options: options,
-    };
+		super();
+		this.type = 'WedgeGeometry';
 
-    // The max depth of the geometry
-    var depth = options.depth;
+		this.parameters = {
+			shape: shape,
+			options: options,
+		};
 
-    // a point on which the peak will pass through
-    const center = options.center;
+		// The max depth of the geometry
+		var depth = options.depth;
 
-    // The direction that the downward slope faces,
-    const angle = options.angle;
+		// a point on which the peak will pass through
+		const center = options.center;
+
+		// The direction that the downward slope faces,
+		const angle = options.angle;
 
     // Get the outer shape and holes.
     var points = shape.extractPoints().shape;
