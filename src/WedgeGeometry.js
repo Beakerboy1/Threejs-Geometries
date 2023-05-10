@@ -344,7 +344,7 @@ class WedgeGeometry extends BufferGeometry {
 		}
 
 		shapes.push( currentShape );
-		shapes.unshift( newOutline );
+		// shapes.unshift( newOutline );
 		return shapes;
 
 	}
