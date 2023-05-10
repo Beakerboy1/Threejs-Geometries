@@ -2,6 +2,7 @@ import {
 	BufferGeometry,
 	Vector2,
 	Shape,
+	ShapeGeometry,
 	ShapeUtils,
 	BufferAttribute,
 } from 'three';
@@ -15,6 +16,7 @@ class WedgeGeometry extends BufferGeometry {
 
 		super();
 		this.type = 'WedgeGeometry';
+
 		this.parameters = {
 			shape: shape,
 			options: options,
@@ -46,19 +48,18 @@ class WedgeGeometry extends BufferGeometry {
 
 			points = points.reverse();
 			// Check that any holes are correct direction.
-			for ( let h = 0; h < holes.length; h ++ ) {
+			for (let h = 0; h < holes.length; h++) {
 
-				const hole = holes[ h ];
+				const hole = holes[h];
 				if ( ShapeUtils.isClockWise( hole ) ) {
 
-					holes[ h ] = hole.reverse();
-
+					holes[h] = hole.reverse();
+	
 				}
 
 			}
 
 		}
-
 		// The original shape's point, but rotated and centered.
 		const newPoints = [];
 
