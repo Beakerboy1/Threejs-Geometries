@@ -126,21 +126,21 @@ class WedgeGeometry extends BufferGeometry {
 		}
 
 		// Build the floor
-		points = newShapes[ 0 ].extractPoints().shape;
-		const faces = ShapeUtils.triangulateShape( points, holes );
-		for ( let i = 0; i < faces.length; i ++ ) {
+		// points = newShapes[ 0 ].extractPoints().shape;
+		// const faces = ShapeUtils.triangulateShape( points, holes );
+		// for ( let i = 0; i < faces.length; i ++ ) {
 
-			const face = faces[ i ];
-			for ( let j = 0; j < 3; j ++ ) {
+			// const face = faces[ i ];
+			// for ( let j = 0; j < 3; j ++ ) {
 
-				const unmoved = this.unMove( [ points[ face[ j ] ].x, points[ face[ j ] ].y ] );
-				const x = unmoved[ 0 ];
-				const y = unmoved[ 1 ];
-				positions.push( x, y, 0 );
+				// const unmoved = this.unMove( [ points[ face[ j ] ].x, points[ face[ j ] ].y ] );
+				// const x = unmoved[ 0 ];
+				// const y = unmoved[ 1 ];
+				// positions.push( x, y, 0 );
 
-			}
+			// }
 
-		}
+		// }
 
 		// Make walls by iterating the outline.
 		points = newShapes[ 0 ].extractPoints().shape;
