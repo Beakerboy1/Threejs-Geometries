@@ -2,7 +2,6 @@ import {
 	BufferGeometry,
 	Vector2,
 	Shape,
-	ShapeGeometry,
 	ShapeUtils,
 	BufferAttribute,
 } from 'three';
@@ -30,17 +29,17 @@ class WedgeGeometry extends BufferGeometry {
 		this.parameters.options.center = center;
 
 		// The direction that the downward slope faces,
-		const angle = options.angle;
+		// const angle = options.angle;
 
 		// Get the outer shape and holes.
 		var points = shape.extractPoints().shape;
 		var holes = shape.extractPoints().holes;
 
 		// The outer shape is the original shape plus any crossing points.
-		const outerShape = new Shape();
+		// const outerShape = new Shape();
 
 		// A straight array of vertices for the outer shape
-		const outerVertices = [];
+		// const outerVertices = [];
 
 		// Ensuse all paths are in the correct direction for the normals
 		const reverse = ! ShapeUtils.isClockWise( points );
@@ -48,18 +47,19 @@ class WedgeGeometry extends BufferGeometry {
 
 			points = points.reverse();
 			// Check that any holes are correct direction.
-			for (let h = 0; h < holes.length; h++) {
+			for ( let h = 0; h < holes.length; h ++ ) {
 
-				const hole = holes[h];
+				const hole = holes[ h ];
 				if ( ShapeUtils.isClockWise( hole ) ) {
 
-					holes[h] = hole.reverse();
-	
+					holes[ h ] = hole.reverse();
+
 				}
 
 			}
 
 		}
+
 		// The original shape's point, but rotated and centered.
 		const newPoints = [];
 
